@@ -122,5 +122,14 @@ defmodule TailsTest do
 
       assert num_of_consolidated_classes == 4
     end
+
+    test "border-x-* and border-y-* do not override one another" do
+      num_of_consolidated_classes =
+        Tails.classes(["border-x-4 border-y-4"])
+        |> String.split(" ")
+        |> Enum.count()
+
+      assert num_of_consolidated_classes == 2
+    end
   end
 end
