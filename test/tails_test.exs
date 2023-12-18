@@ -113,5 +113,14 @@ defmodule TailsTest do
       refute Tails.classes(["border-b-4 border-opacity-20"]) == "border-opacity-20"
       refute Tails.classes(["border-opacity-20 border-b-4"]) == "border-b-4"
     end
+
+    test "border-b-*, border-t-*, border-l-*, and border-r-* do not override one another" do
+      num_of_consolidated_classes =
+        Tails.classes(["border-b-4 border-t-4 border-l-4 border-r-4"])
+        |> String.split(" ")
+        |> Enum.count()
+
+      assert num_of_consolidated_classes == 4
+    end
   end
 end
